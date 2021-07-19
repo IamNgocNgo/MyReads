@@ -15,62 +15,37 @@ class SearchBook extends React.Component {
     this.setState({ query: query.trim() })
   }
   
-  addShelfProperty() {
-    if (this.state.searchBooks){
-      //console.log(`Here3 ${this.state.searchBooks.length}`);
-      let searchBooks = this.state.searchBooks.map((b) => {
+  addShelfProperty(books) {
+    if(books){
+      for (const b of books){
         b.shelf = "none";
-        //console.log(`Here4 ${this.props.books[2].id}  `);
         for (const libraryBook of this.props.books){
           if (b.id === libraryBook.id){
             b.shelf = libraryBook.shelf;
-          //console.log(`Here5 ${this.props.books.length}  ${b.shelf} `);
           }
         }
-           //console.log(`Here6 ${this.state.searchBooks[5].title}  ${b.shelf} `);
-          return b;
-      });
-      this.setState({ searchBooks: searchBooks });
-      //console.log(`Here8 ${this.state.searchBooks.length} `);
+      }
+      
     }
+    return books;
   }
   
   componentDidUpdate(prevProps, prevState) {
     if(prevState.query !== this.state.query){
       if (!!this.state.query) {
-      	BooksAPI.search(this.state.query, 20).then((searchBooks) => {this.setState({searchBooks: searchBooks})});
-       // console.log(`Here ${this.state.searchBooks.length} `);
-        this.addShelfProperty();
+      	BooksAPI.search(this.state.query, 20).then((searchBooks) => {
+          searchBooks = this.addShelfProperty(searchBooks);
+          this.setState({searchBooks: searchBooks})
+        });
+        
       }
       else 
-        this.setState({searchBooks: []})
-      
-      
-      
+        this.setState({searchBooks: []})   
     }
   }
   
    
   render(){
-    /*for (const searchBook of this.state.books){
-      for (const libraryBook of this.props.books){
-        if(searchBook.title === libraryBook.title){
-          this.props.onHandleChangeShelf(searchBook, libraryBook.shelf);
-        }
-      }
-    }*/
-   /* this.state.books.map((searchBook, i)=> {
-      for (const libraryBook of this.props.books){
-        if(searchBook.title === libraryBook.title){
-           return(this.setState({books: [...this.state.books.slice(0,i),
-                             Object.assign({}, this.state.book[i], "shelf: libraryBook.shelf"),
-                            ...this.state.books.slice(i+1)]}))
-        }
-      };
-     
-    })*/
-    //console.log(`TEST: ${this.state.books[1].title}- ${this.state.books[1].shelf}`);  
-    
     return(
       <div className="search-books">
             <div className="search-books-bar">
