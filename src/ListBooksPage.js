@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 class ListBooksPage extends React.Component {
   
   render(){
-
     return(
       <div className="list-books">
         <div className="list-books-title">

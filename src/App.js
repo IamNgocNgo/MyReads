@@ -27,7 +27,6 @@ class BooksApp extends React.Component {
   
 
   render() {
-    //const {getAllBooks} = this;
     return (
       <BrowserRouter>
         <div className="app">

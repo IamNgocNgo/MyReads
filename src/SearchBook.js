@@ -33,10 +33,12 @@ class SearchBook extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if(prevState.query !== this.state.query){
       if (!!this.state.query) {
-      	BooksAPI.search(this.state.query, 20).then((searchBooks) => {
+      	const promise = BooksAPI.search(this.state.query, 20).then((searchBooks) => {
           searchBooks = this.addShelfProperty(searchBooks);
           this.setState({searchBooks: searchBooks})
         });
+        
+        promise.catch(error => console.log(`Caught by .catch ${error}`));
         
       }
       else 
