@@ -2,8 +2,7 @@ import React from 'react'
 import ListShelves from './ListShelves.js'
 import { Link } from 'react-router-dom'
 
-class ListBooksPage extends React.Component {
-  
+class ListBooksPage extends React.Component {  
   render(){
     return(
       <div className="list-books">
@@ -15,6 +14,7 @@ class ListBooksPage extends React.Component {
           	<ListShelves {...this.props}/>
           </div>
         </div>
+
         <div className="open-search">
           <Link
             to='/search'
@@ -27,4 +27,3 @@ class ListBooksPage extends React.Component {
 }
 
 export default ListBooksPage
-
