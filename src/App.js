@@ -11,16 +11,27 @@ class BooksApp extends React.Component {
     books: [],
   }
   
+  /**
+  * @description Get all books on the shelves (backend)
+  */
   getAllBooks = () => {
     BooksAPI.getAll().then((books) => {
       this.setState({ books: books })
     })
   }
   
+  /**
+  * @description Handle a book change to other shelf
+  * @param {object} book
+  * @param {string} shelf
+  */
   handleChangeShelf = (book, shelf) => {
    	BooksAPI.update(book, shelf).then(_=>this.getAllBooks())
   }
   
+  /**
+  * @description Get data from backend to display on main page
+  */
   componentDidMount() {
     this.getAllBooks();
   }

@@ -3,26 +3,26 @@ import PropTypes from 'prop-types'
 
 
 class Book extends React.Component { 
-  
+  /**
+  * @description Handle a book change to other shelf 
+  * when user click on choosing shelf option or add book to shelf
+  */  
   handleChangeShelf = (event) => {
-    //event.preventDefault()
+    event.preventDefault()
     let shelf = event.target.value;
     this.props.onHandleChangeShelf(this.props.aBook,shelf);
   }
   
   render(){
    const aBook = this.props.aBook;
-    /*if (!aBook.shelf) {
-        	aBook.shelf = "none"};*/
     
-    // Some books doesn't have imageLinks, then when we access .smallThumbnail of undefined, 
-    // we will get error, so we need to check if imageLinks existed
-    const placeholder = '../img/placeholder.png'; 
-	const thumbnail = aBook.imageLinks ? aBook.imageLinks.thumbnail : placeholder;
+   // Some books doesn't have imageLinks, then when we access .smallThumbnail of undefined, 
+   // we will get error, so we need to check if imageLinks existed
+   const placeholder = '../img/placeholder.png'; 
+   const thumbnail = aBook.imageLinks ? aBook.imageLinks.thumbnail : placeholder;
    return(
      <div className="book">
       <div className="book-top">
-    
      	<div className="book-cover" 
      			style={{ 
      						width: 128, 
