@@ -2,47 +2,45 @@ import React from 'react'
 import ListBooks from './ListBooks.js'
 import PropTypes from 'prop-types'
 
-class ListShelves extends React.Component {  
-  render(){
-    const books = this.props.books;
+function ListShelves(props) {  
+  const books = props.books;
     
-    let shelves = [
-      { title: "Currently Reading",
-        value: "currentlyReading",
-        books: []
-      },
-      { title: "Want to Read",
-        value: "wantToRead",
-        books: []
-      },
-      { title: "Read",
-        value: "read",
-        books: []
-      },
-    ];
+  let shelves = [
+    { title: "Currently Reading",
+      value: "currentlyReading",
+      books: []
+    },
+    { title: "Want to Read",
+      value: "wantToRead",
+      books: []
+    },
+    { title: "Read",
+      value: "read",
+      books: []
+    },
+  ];
     
-    for (const book of books){
-      for (const shelf of shelves){
-        if(shelf.value === book.shelf){
-          shelf.books.push(book);
-          break;
-        }
+  for (const book of books){
+    for (const shelf of shelves){
+      if(shelf.value === book.shelf){
+        shelf.books.push(book);
+        break;
       }
     }
+  }
     
-    return(	
-      <div className="bookshelf">
+  return(	
+    <div className="bookshelf">
       {shelves.map((shelf,i) => {return(
       	<div key={i}><h2 className="bookshelf-title">{shelf.title}</h2>
           <ListBooks
     		books={shelf.books}
-      		onHandleChangeShelf={this.props.onHandleChangeShelf}
+      		onHandleChangeShelf={props.onHandleChangeShelf}
           />
         </div>
       )})}
-      </div>   	
-    )
-  }
+    </div>   	
+  )
 }
 export default ListShelves
 
