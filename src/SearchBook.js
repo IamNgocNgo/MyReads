@@ -61,11 +61,14 @@ class SearchBook extends React.Component {
         });
         
         //If an invalid search query is entered, the `BooksAPI.search` returns `error` property.
-        promise.catch(error => console.log(`Caught by .catch ${error}`));
+        promise.catch(error => {
+          this.setState({searchBooks: undefined});
+          console.log(`Caught by .catch ${error}`)
+        });
         
       }
       else 
-        this.setState({searchBooks: []})   
+        this.setState({searchBooks: []}); 
     }
   }
   
